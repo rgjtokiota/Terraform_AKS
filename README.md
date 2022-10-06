@@ -40,7 +40,9 @@ ssh-keygen -f ~/.ssh/id_rsa_terraform
 az keyvault secret set --vault-name <SU_NOMBRE_KV> --name LinuxSSHPubKey -f ~/.ssh/id_rsa_terraform.pub > /dev/null
 az keyvault secret set --vault-name rgjkvaks --name LinuxSSHPubKey -f ~/.ssh/id_rsa_terraform.pub > /dev/null
 ## Almacene la identificación principal del servicio en Azure KeyVault 
-az keyvault secret set --vault-name <SU_NOMBRE_KV> --name spn-id --value <SPN_ID> /dev/null
+az keyvault secret set --vault-name <SU_NOMBRE_KV> --name spn-id --value <SPN_ID> /dev/null (windows no /dev/null)
 az keyvault secret set --vault-name rgjkvaks --name spn-id --value <SPN_ID> /dev/null
 ## Almacenar el secreto principal del servicio en Azure KeyVault 
 az keyvault secret set --vault-name <SU_NOMBRE_KV> --name spn-secret --value <SPN_SECRET> /dev/null
+az keyvault secret set --vault-name rgjkvaks --name spn-secret --value <SPN_SECRET>
+terraform init -backend-config="resource_group_name=AksTerraform-RG" -backend-config="storage_account_name=rgjstorageaks" -backend-config="container_name=tfstate"
